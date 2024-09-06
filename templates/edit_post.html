@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Edit '{{ post['title'] }}' Post</h1>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+
+  <form method="post" style="margin-bottom: 30px">
+    <label for="title">Title</label><br>
+    <input type="text" id="title" name="title" value="{{ post['title'] }}">
+    <br>
+    <label for="content">Content</label><br>
+    <textarea id="content" name="content">{{ post['content'] }}</textarea>
+    <br>
+    <input type="submit" value="Submit">
+  </form>
+
+  <a href="{{ url_for('get_post', post_id=post['id']) }}">Back to Post page</a>
+{% endblock %}
